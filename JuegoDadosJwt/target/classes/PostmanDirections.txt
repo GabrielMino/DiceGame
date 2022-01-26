@@ -1,0 +1,71 @@
+Jason Web Token 
+
+Header -> algortimo de cifrado
+
+Payload -> Datos ej : nombre de usuario, fecha de creación, fecha de expiración
+
+Verify Signature -> secret (contraseña)(para generarla se utilizan los dos anteriores)
+
+#Dirección para generar nuevo user
+http://localhost:8080/auth/nuevo/ POST
+
+#Incluir json en el body
+Body/raw/json
+
+#Probar errores en los campos!
+#Se agrega por defecto las autorizaciones a nivel de usuario(read)
+{"nombre":"user","email":"u@u.com",
+"nombreUsuario":"user", "password":"password"}
+
+{"nombre":"admin","email":"a@a.com",
+"nombreUsuario":"admin", "password":"password", "roles":["admin"]}
+
+#confirmar que se han agregado usuarios y roles
+http://localhost/phpmyadmin/
+
+#loguearse
+http://localhost:8080/auth/login/ POST
+
+
+# Loguearme como admin
+{"nombreUsuario":"admin", "password":"password"}
+
+#Respuesta
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0MzA0NDU4MSwiZXhwIjoxNjQzMDgwNTgxfQ.DZKNQNPjBK_HR1WU8iubPYv8Dj53FA492hwsSMvZKNfGb1o7RGJaPFSdBEV7SHWArBPOl3rw9ZKhH0ifJ9fj5Q",
+    "bearer": "Bearer",
+    "nombreUsuario": "admin",
+    "authorities": [
+        {
+            "authority": "ROLE_ADMIN"
+        },
+        {
+            "authority": "ROLE_USER"
+        }
+    ]
+}
+
+http://localhost:8080/players/
+
+Authorization/Bearer Token/ pegartoken
+
+
+
+# Loguearme como user
+{"nombreUsuario":"user", "password":"password"}
+
+
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjQzMDQ1NTE3LCJleHAiOjE2NDMwODE1MTd9.6-YO7TpnK5FBUtP503fUXYiq7ooIq4V0b9hGgu6muQfu6V91P6dFGNuYAhd-FTOTVjF1XleGa7HCf5Z2pqjI0Q",
+    "bearer": "Bearer",
+    "nombreUsuario": "user",
+    "authorities": [
+        {
+            "authority": "ROLE_USER"
+        }
+    ]
+}
+
+
+Authorization/Bearer Token/ pegartoken
+
